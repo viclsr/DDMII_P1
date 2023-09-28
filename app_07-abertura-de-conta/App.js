@@ -7,90 +7,77 @@ import {
   View,
   Button,
 } from 'react-native';
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 
-import { Card } from 'react-native-paper';
 import Slider from '@react-native-community/slider';
-import AssetExample from './components/AssetExample';
 import { Picker } from '@react-native-picker/picker';
 
 export default function App() {
-  let escolaridades = [
-    { id: 1, nome: 'Selecione uma opção' },
-    { id: 2, nome: 'Ensino fundamental' },
-    { id: 3, nome: 'Ensino médio' },
-    { id: 4, nome: 'Ensino superior' },
-  ];
-
-  const [escolaridade, setEscolaridade] = useState(0);
-  const [status, setStatus] = useState(false);
-
   const [nome, setNome] = useState('');
-  const [inputNome, setInputNome] = useState('');
-
   const [idade, setIdade] = useState('');
-  const [inputIdade, setInputIdade] = useState('');
-
-  let initial_sexos = [
-    { id: 1, nome: 'Selecione uma opção' },
-    { id: 2, nome: 'Feminino' },
-    { id: 3, nome: 'Masculino' },
-  ];
-
-  const [sexo, setSexo] = useState(0);
-  const [sexos, setSexos] = useState(initial_sexos);
-
-  const [valor, setValor] = useState(0);
+  const [sexo, setSexo] = useState('Selecione uma opção');
+  const [escolaridade, setEscolaridade] = useState('Selecione uma opção');
+  const [limite, setLimite] = useState(0);
+  const [brasileiro, setBrasileiro] = useState(false);
   const [dados, setDados] = useState('');
 
-  function entrar() {
-    let d = 'Nome: ' + nome + '\nLimite: ' + valor;
+  function confirmar() {
+    let d = `Nome: ${nome}\nIdade: ${idade}\nSexo: ${sexo}\nEscolaridade: ${escolaridade}\nLimite na conta: ${limite.toFixed(0)}\nBrasileiro: ${brasileiro ? 'Sim' : 'Não'}`;
     setDados(d);
   }
-
-  let sexosItem = sexos.map((slider, chave) => {
-    return <Picker.Item key={chave} value={slider.id} label={slider.nome} />;
-  });
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.paragraph}></Text>
-      <TextInput
+       <TextInput
         style={styles.input}
         placeholder="Nome: "
-        onChangeText={setInputNome}
+        onChangeText={setNome}
+        value={nome}
       />
       <TextInput
         style={styles.input}
         placeholder="Idade: "
-        onChangeText={setInputIdade}
+        onChangeText={setIdade}
+        value={idade}
       />
       <Picker
-        selectedValue={sexo + 1}
-        onValueChange={(itemValue, itemIndex) => setSexo(itemIndex)}>
-        {sexosItem}
+        selectedValue={sexo}
+        onValueChange={(itemValue) => setSexo(itemValue)}>
+        <Picker.Item label="Selecione uma opção" value="Selecione uma opção" />
+        <Picker.Item label="Feminino" value="Feminino" />
+        <Picker.Item label="Masculino" value="Masculino" />
       </Picker>
-      <Button title="Entrar" onPress={entrar} />
+       <Picker
+        selectedValue={escolaridade}
+        onValueChange={(itemValue) => setEscolaridade(itemValue)}>
+        <Picker.Item label="Selecione uma opção" value="Selecione uma opção" />
+        <Picker.Item label="Ensino fundamental" value="Ensino fundamental" />
+        <Picker.Item label="Ensino médio" value="Ensino médio" />
+        <Picker.Item label="Ensino superior" value="Ensino superior" />
+      </Picker>
+
+      <Button title="Confirmar" onPress={confirmar} />
 
       <Text style={styles}> {dados} </Text>
 
       <Slider
         minimumValue={0}
         maximumValue={100}
-        onValueChange={(valorSelecionado) => setValor(valorSelecionado)}
-        value={valor}
+        onValueChange={(valorSelecionado) => setLimite(valorSelecionado)}
+        value={limite}
       />
 
       <Text style={{ textAlign: 'center', fontSize: 30 }}>
-        {valor.toFixed(0)}
+        {limite.toFixed(0)}
       </Text>
 
       <View
         style={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
         <Text style={{ fontSize: 30 }}>Brasileiro </Text>
         <Switch
-          value={status}
-          onValueChange={(valorSwitch) => setStatus(valorSwitch)}
+          value={brasileiro}
+          onValueChange={(valorSwitch) => setBrasileiro(valorSwitch)}
           thumbColor="orange"
         />
       </View>
