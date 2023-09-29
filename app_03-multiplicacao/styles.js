@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     gap: '10px',
+    justifyContent: 'center',
+    height: '100%'
   },
   titulo: {
     fontSize: '20px',

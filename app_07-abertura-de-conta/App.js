@@ -23,7 +23,7 @@ export default function App() {
 
   function confirmar() {
     setConfirmado(true);
-    let d = `Nome: ${nome}\nIdade: ${idade}\nSexo: ${sexo}\nEscolaridade: ${escolaridade}\nLimite na conta: ${limite.toFixed(
+    let d = `Nome: ${nome}\nIdade: ${idade}\nSexo: ${sexo}\nEscolaridade: ${escolaridade}\nLimite na conta: R$ ${limite.toFixed(
       0
     )}\nBrasileiro: ${brasileiro ? 'Sim' : 'Não'}`;
     setDados(d);
@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
+    paddingLeft: 7,
     height: 45,
     width: '100%',
     borderBottomWidth: 1,

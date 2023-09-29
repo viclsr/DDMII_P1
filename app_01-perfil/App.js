@@ -45,7 +45,7 @@ function MeuPerfil() {
         <Text style={{ textAlign: 'center' }}>
           Superior - Sistemas para Internet Fatec Rubens Lara - Baixada Santista
         </Text>
-        <Text style={{ fontWeight: '700' }}>
+        <Text style={{ fontWeight: '700', textAlign: 'center' }}>
           Jan.2021 - Dez.2023 ( Previsão de Formatura )
         </Text>
       </View>
